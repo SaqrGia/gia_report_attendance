@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="absence_report_tpl">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2 class="text-center">تقرير غياب الموظفين</h2>
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <strong>الفترة:</strong> <span t-esc="date_from" t-options='{"widget": "date"}'/> إلى <span t-esc="date_to" t-options='{"widget": "date"}'/>
+                        </div>
+                        <div class="col-6">
+                            <strong>ساعات الدوام:</strong> <span t-esc="work_hour_from"/> إلى <span t-esc="work_hour_to"/>
+                            <br/>
+                            <strong>وقت إغلاق البصمة:</strong> <span t-esc="closing_hour"/>
+                        </div>
+                    </div>
+
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                            <tr>
+                                <th class="text-center">الموظف</th>
+                                <th class="text-center">عدد أيام الغياب</th>
+                                <th class="text-center">تواريخ الغياب</th>
+                                <!-- تم إزالة عمود سبب الغیاب -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-if="not results">
+                                <tr>
+                                    <td colspan="3" class="text-center">لا توجد غيابات خلال هذه الفترة.</td>
+                                </tr>
+                            </t>
+                            <tr t-foreach="results" t-as="result">
+                                <td><span t-esc="result['employee_name']"/></td>
+                                <td class="text-center"><span t-esc="result['absent_days']"/></td>
+                                <td>
+                                    <t t-foreach="result['absent_dates']" t-as="date">
+                                        <span t-esc="date"/><t t-if="not date_index == len(result['absent_dates']) - 1">, </t>
+                                    </t>
+                                </td>
+                                <!-- تم إزالة خلية سبب الغیاب -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

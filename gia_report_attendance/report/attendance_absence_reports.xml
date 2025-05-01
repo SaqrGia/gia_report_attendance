@@ -1,0 +1,12 @@
+<!-- report/attendance_absence_reports.xml -->
+<odoo>
+    <record id="action_attendance_absence_report" model="ir.actions.report">
+        <field name="name">تقرير غياب الموظفين</field>
+        <field name="model">attendance.absence.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">gia_report_attendance.absence_report_tpl</field>
+        <field name="report_file">gia_report_attendance.absence_report_tpl</field>
+        <field name="binding_model_id" ref="model_attendance_absence_report_wizard"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
